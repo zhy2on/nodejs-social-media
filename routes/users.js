@@ -14,7 +14,7 @@ router.put("/:id", async (req, res) => {
 			}
 		}
 		try {
-			const user = await User.findByIdAndUpdate(req.params.id, {
+			await User.findByIdAndUpdate(req.params.id, {
 				$set: req.body,
 			});
 			res.status(200).json("Account has been updated");
@@ -72,6 +72,7 @@ router.put("/:id/follow", async (req, res) => {
 	}
 });
 
+//unfollow a user
 router.put("/:id/unfollow", async (req, res) => {
 	if (req.body.userId !== req.params.id) {
 		try {
@@ -91,7 +92,5 @@ router.put("/:id/unfollow", async (req, res) => {
 		res.status(403).json("You can not unfollow yourself");
 	}
 });
-
-//unfollow a user
 
 module.exports = router
